@@ -169,8 +169,8 @@ export default function Header() {
               </Stack>
               <Text marginTop="6" fontFamily="mono">
                 Get in touch <span>👉</span>{' '}
-                <a className="mail" href="mailto:vinayak.dbdb@gmail.com">
-                  vinayak.dbdb@gmail.com
+                <a className="mail" href="mailto:contact@vinayak.cloud">
+                  contact@vinayak.cloud
                 </a>
               </Text>
             </Box>
