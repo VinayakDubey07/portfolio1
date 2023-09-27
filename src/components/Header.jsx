@@ -19,14 +19,14 @@ import {
   FaNodeJs,
 
   FaReact,
- 
+  FaArrowCircleRight,
   FaVuejs,
   FaGithub,
   FaFigma,
   FaUbuntu,
   FaGitlab,
 } from 'react-icons/fa'
-import {  SiGraphql, SiTensorflow, SiKeras, SiPandas, SiNumpy, SiScikitlearn, SiCplusplus, SiPython, SiNextdotjs,SiBootstrap, SiMysql, SiNetlify, SiVercel } from 'react-icons/si'
+import {  SiGraphql, SiTensorflow, SiKeras, SiPandas, SiNumpy, SiScikitlearn, SiCplusplus, SiPython, SiNextdotjs,SiBootstrap, SiMysql, SiNetlify, SiVercel, SiBlockchaindotcom, } from 'react-icons/si'
 
 import '../index.css'
 
@@ -94,7 +94,7 @@ export default function Header() {
                 <span className="highlighted-word">
                   Information Science Engineering Student
                 </span>
-                , <span className="highlighted-word">Frontend Developer</span>{' '}
+                , <span className="highlighted-word">Software Developer</span>{' '}
                 and <span className="highlighted-word">Tech Enthusiast</span>.
               </Text>
             </Box>
@@ -175,7 +175,7 @@ export default function Header() {
                 fontSize="1.2rem"
                 fontFamily="mono"
               >
-                Tools
+                Developer Tools
               </Badge>
               <Stack
                 paddingX="14"
@@ -243,15 +243,61 @@ export default function Header() {
                 fontSize="1.2rem"
                 fontFamily="mono"
               >
+                Projects
+              </Badge>
+              <Stack as={Box} marginY="5" spacing="5">
+                <Text fontWeight={300}
+                fontFamily="mono"
+                fontSize={{ md: 'large' }}
+                marginX="1"
+                boxSizing="content-box">
+                  <Link href="https://github.com/VinayakDubey07/Decentralised-Image-Sharing-And-Storing-System" isExternal>
+                     Decentralized Image Storing and Sharing System
+                  </Link>
+                </Text>
+                <Text fontWeight={300}
+                fontFamily="mono"
+                fontSize={{ md: 'large' }}
+                marginX="1"
+                boxSizing="content-box">
+                  <Link href="https://shortthebig.netlify.app/" isExternal>
+                     Article Summarizer
+                  </Link>
+                </Text>
+                <Text fontWeight={300}
+                fontFamily="mono"
+                fontSize={{ md: 'large' }}
+                marginX="1"
+                boxSizing="content-box">
+                  <Link href="https://github.com/VinayakDubey07/crypto-news-app" isExternal>
+                  Cryptocurrency News App
+                  </Link>
+                </Text>
+              </Stack>
+              <Badge
+                as="a"
+                variant="outline"
+                marginBottom="2"
+                fontSize="1.2rem"
+                fontFamily="mono"
+              >
                 On the web
               </Badge>
               <Stack as={Box} marginY="5" spacing="5">
-                <Text fontSize="2xl" fontWeight="bold">
+                <Text fontWeight={300}
+                fontFamily="mono"
+                fontSize={{ md: 'large' }}
+                marginX="1"
+                boxSizing="content-box">
                   <Link href="https://github.com/VinayakDubey07" isExternal>
                     <Icon as={FiGithub} /> @Github
                   </Link>
                 </Text>
-                <Text fontSize="2xl" fontWeight="bold">
+                <Text fontWeight={300}
+                fontFamily="mono"
+                fontSize={{ md: 'large' }}
+                marginX="1"
+                boxSizing="content-box">
                   <Link href="https://linkedin.com/in/vinayaksde" isExternal>
                     <Icon as={FiLinkedin} /> @LinkedIn
                   </Link>
