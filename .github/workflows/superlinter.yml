@@ -1,0 +1,11 @@
+name: Checkout
+
+on: push
+
+jobs:
+  ci:
+    name: Lint code base
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
