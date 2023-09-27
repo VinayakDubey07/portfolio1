@@ -26,7 +26,8 @@ import {
   FaUbuntu,
   FaGitlab,
 } from 'react-icons/fa'
-import { SiDjango, SiGraphql } from 'react-icons/si'
+import {  SiGraphql, SiTensorflow, SiKeras, SiPandas, SiNumpy, SiScikitlearn, SiCplusplus, SiPython, SiNextdotjs,SiBootstrap, SiMysql, SiNetlify, SiVercel } from 'react-icons/si'
+
 import '../index.css'
 
 export default function Header() {
@@ -98,14 +99,14 @@ export default function Header() {
               </Text>
             </Box>
             <Box justifyContent="center">
-              <Badge
+            <Badge
                 as="a"
                 variant="outline"
                 marginBottom="5"
                 fontSize="1.2rem"
                 fontFamily="mono"
               >
-                stack
+                Languages
               </Badge>
               <Stack
                 paddingX="14"
@@ -116,22 +117,52 @@ export default function Header() {
                 spacing="6"
               >
                 <Link pointerEvents="none" as="span">
+                  <Icon as={SiCplusplus} />
+                </Link>
+                <Link pointerEvents="none">
+                  <Icon as={SiPython} />
+                </Link>
+                <Link pointerEvents="none">
                   <Icon as={FaJs} />
                 </Link>
                 <Link pointerEvents="none">
                   <Icon as={FaHtml5} />
                 </Link>
                 <Link pointerEvents="none">
+                  <Icon as={SiMysql} />
+                </Link>
+                
+              </Stack>
+              <Badge
+                as="a"
+                variant="outline"
+                marginBottom="5"
+                fontSize="1.2rem"
+                fontFamily="mono"
+              >
+                Frameworks
+              </Badge>
+              <Stack
+                paddingX="14"
+                justify="center"
+                direction="row"
+                wrap="wrap"
+                fontSize="3.2rem"
+                spacing="6"
+              >
+                
+                
+                <Link pointerEvents="none">
                   <Icon as={FaCss3} />
                 </Link>
                 <Link pointerEvents="none">
-                  <Icon as={FaVuejs} />
+                  <Icon as={SiBootstrap} />
                 </Link>
                 <Link pointerEvents="none">
                   <Icon as={FaNodeJs} />
                 </Link>
                 <Link pointerEvents="none">
-                  <Icon as={SiGraphql} />
+                  <Icon as={SiNextdotjs} />
                 </Link>
                 <Link pointerEvents="none">
                   <Icon as={FaReact} />
@@ -157,16 +188,53 @@ export default function Header() {
                 <Link pointerEvents="none" as="span">
                   <Icon as={FaGithub} />
                 </Link>
-                <Link pointerEvents="none" as="span">
-                  <Icon as={FaFigma} />
-                </Link>
+                
                 <Link pointerEvents="none" as="span">
                   <Icon as={FaUbuntu} />
                 </Link>
                 <Link pointerEvents="none" as="span">
                   <Icon as={FaGitlab} />
                 </Link>
+                <Link pointerEvents="none" as="span">
+                  <Icon as={SiVercel} />
+                </Link>
+                <Link pointerEvents="none" as="span">
+                  <Icon as={SiNetlify} />
+                </Link>
                 
+              </Stack>
+              <Badge
+                as="a"
+                variant="outline"
+                marginBottom="5"
+                fontSize="1.2rem"
+                fontFamily="mono"
+              >
+                Libraries
+              </Badge>
+              <Stack
+                paddingX="14"
+                justify="center"
+                direction="row"
+                wrap="wrap"
+                fontSize="3.2rem"
+                spacing="6"
+              >
+                <Link pointerEvents="none" as="span">
+                  <Icon as={SiTensorflow} />
+                </Link>
+                <Link pointerEvents="none" as="span">
+                  <Icon as={SiKeras} />
+                </Link>
+                <Link pointerEvents="none" as="span">
+                  <Icon as={SiPandas} />
+                </Link>
+                <Link pointerEvents="none" as="span">
+                  <Icon as={SiNumpy} />
+                </Link>
+                <Link pointerEvents="none" as="span">
+                  <Icon as={SiScikitlearn} />
+                </Link>
               </Stack>
               <Badge
                 as="a"
@@ -180,12 +248,12 @@ export default function Header() {
               <Stack as={Box} marginY="5" spacing="5">
                 <Text fontSize="2xl" fontWeight="bold">
                   <Link href="https://github.com/VinayakDubey07" isExternal>
-                    <Icon as={FiGithub} /> @Vinayak
+                    <Icon as={FiGithub} /> @Github
                   </Link>
                 </Text>
                 <Text fontSize="2xl" fontWeight="bold">
                   <Link href="https://linkedin.com/in/vinayaksde" isExternal>
-                    <Icon as={FiLinkedin} /> @Vinayak
+                    <Icon as={FiLinkedin} /> @LinkedIn
                   </Link>
                 </Text>
               </Stack>
