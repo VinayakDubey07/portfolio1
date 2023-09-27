@@ -17,13 +17,14 @@ import {
   FaHtml5,
   FaJs,
   FaNodeJs,
-  FaPython,
+
   FaReact,
-  FaTelegram,
+ 
   FaVuejs,
   FaGithub,
   FaFigma,
   FaUbuntu,
+  FaGitlab,
 } from 'react-icons/fa'
 import { SiDjango, SiGraphql } from 'react-icons/si'
 import '../index.css'
@@ -69,6 +70,20 @@ export default function Header() {
             </Box>
             <Box alignItems="center">
               <Text
+                fontWeight={500}
+                fontSize={{ base: 20, md: 40 }}
+                fontFamily="mono"
+                fontSize={{ md: 'large' }}
+                marginX="1"
+                boxSizing="content-box"
+              >
+                <span className="highlighted-word">
+                 Upcoming Associate Application Developer @Oracle
+                </span>  
+              </Text>
+            </Box>
+            <Box alignItems="center">
+              <Text
                 fontWeight={300}
                 fontFamily="mono"
                 fontSize={{ md: 'large' }}
@@ -76,10 +91,10 @@ export default function Header() {
                 boxSizing="content-box"
               >
                 <span className="highlighted-word">
-                  information science engineering student
+                  Information Science Engineering Student
                 </span>
-                , <span className="highlighted-word">frontend developer</span>{' '}
-                and <span className="highlighted-word">tech enthusiast</span>.
+                , <span className="highlighted-word">Frontend Developer</span>{' '}
+                and <span className="highlighted-word">Tech Enthusiast</span>.
               </Text>
             </Box>
             <Box justifyContent="center">
@@ -88,6 +103,7 @@ export default function Header() {
                 variant="outline"
                 marginBottom="5"
                 fontSize="1.2rem"
+                fontFamily="mono"
               >
                 stack
               </Badge>
@@ -126,6 +142,7 @@ export default function Header() {
                 variant="outline"
                 marginBottom="5"
                 fontSize="1.2rem"
+                fontFamily="mono"
               >
                 Tools
               </Badge>
@@ -146,22 +163,27 @@ export default function Header() {
                 <Link pointerEvents="none" as="span">
                   <Icon as={FaUbuntu} />
                 </Link>
+                <Link pointerEvents="none" as="span">
+                  <Icon as={FaGitlab} />
+                </Link>
+                
               </Stack>
               <Badge
                 as="a"
                 variant="outline"
                 marginBottom="2"
                 fontSize="1.2rem"
+                fontFamily="mono"
               >
                 On the web
               </Badge>
               <Stack as={Box} marginY="5" spacing="5">
-                <Text fontSize="2xl" fontWeight="thin">
+                <Text fontSize="2xl" fontWeight="bold">
                   <Link href="https://github.com/VinayakDubey07" isExternal>
                     <Icon as={FiGithub} /> @Vinayak
                   </Link>
                 </Text>
-                <Text fontSize="2xl" fontWeight="thin">
+                <Text fontSize="2xl" fontWeight="bold">
                   <Link href="https://linkedin.com/in/vinayaksde" isExternal>
                     <Icon as={FiLinkedin} /> @Vinayak
                   </Link>
