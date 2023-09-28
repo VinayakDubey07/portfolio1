@@ -17,19 +17,13 @@ import {
   FaHtml5,
   FaJs,
   FaNodeJs,
-
   FaReact,
-  FaArrowCircleRight,
-  FaVuejs,
   FaGithub,
-  FaFigma,
   FaUbuntu,
   FaGitlab,
 } from 'react-icons/fa'
-import {  SiGraphql, SiTensorflow, SiKeras, SiPandas, SiNumpy, SiScikitlearn, SiCplusplus, SiPython, SiNextdotjs,SiBootstrap, SiMysql, SiNetlify, SiVercel, SiBlockchaindotcom, SiMedium} from 'react-icons/si'
-
+import { SiGraphql, SiTensorflow, SiKeras, SiPandas, SiNumpy, SiScikitlearn, SiCplusplus, SiPython, SiNextdotjs, SiBootstrap, SiMysql, SiNetlify, SiVercel, SiBlockchaindotcom, SiMedium} from 'react-icons/si'
 import '../index.css'
-
 export default function Header() {
   return (
     <>
@@ -79,8 +73,8 @@ export default function Header() {
                 boxSizing="content-box"
               >
                 <span className="highlighted-word">
-                 Upcoming Associate Application Developer @Oracle
-                </span>  
+                  Upcoming Associate Application Developer @Oracle
+                </span>
               </Text>
             </Box>
             <Box alignItems="center">
@@ -99,7 +93,7 @@ export default function Header() {
               </Text>
             </Box>
             <Box justifyContent="center">
-            <Badge
+              <Badge
                 as="a"
                 variant="outline"
                 marginBottom="5"
@@ -131,7 +125,7 @@ export default function Header() {
                 <Link pointerEvents="none">
                   <Icon as={SiMysql} />
                 </Link>
-                
+
               </Stack>
               <Badge
                 as="a"
@@ -150,8 +144,8 @@ export default function Header() {
                 fontSize="3.2rem"
                 spacing="6"
               >
-                
-                
+
+
                 <Link pointerEvents="none">
                   <Icon as={FaCss3} />
                 </Link>
@@ -188,7 +182,7 @@ export default function Header() {
                 <Link pointerEvents="none" as="span">
                   <Icon as={FaGithub} />
                 </Link>
-                
+
                 <Link pointerEvents="none" as="span">
                   <Icon as={FaUbuntu} />
                 </Link>
@@ -201,7 +195,7 @@ export default function Header() {
                 <Link pointerEvents="none" as="span">
                   <Icon as={SiNetlify} />
                 </Link>
-                
+
               </Stack>
               <Badge
                 as="a"
@@ -247,30 +241,30 @@ export default function Header() {
               </Badge>
               <Stack as={Box} marginY="5" spacing="5">
                 <Text fontWeight={300}
-                fontFamily="mono"
-                fontSize={{ md: 'large' }}
-                marginX="1"
-                boxSizing="content-box">
+                  fontFamily="mono"
+                  fontSize={{ md: 'large' }}
+                  marginX="1"
+                  boxSizing="content-box">
                   <Link href="https://github.com/VinayakDubey07/Decentralised-Image-Sharing-And-Storing-System" isExternal>
-                     Decentralized Image Storing and Sharing System
+                    Decentralized Image Storing and Sharing System
                   </Link>
                 </Text>
                 <Text fontWeight={300}
-                fontFamily="mono"
-                fontSize={{ md: 'large' }}
-                marginX="1"
-                boxSizing="content-box">
+                  fontFamily="mono"
+                  fontSize={{ md: 'large' }}
+                  marginX="1"
+                  boxSizing="content-box">
                   <Link href="https://shortthebig.netlify.app/" isExternal>
-                     Article Summarizer
+                    Article Summarizer
                   </Link>
                 </Text>
                 <Text fontWeight={300}
-                fontFamily="mono"
-                fontSize={{ md: 'large' }}
-                marginX="1"
-                boxSizing="content-box">
+                  fontFamily="mono"
+                  fontSize={{ md: 'large' }}
+                  marginX="1"
+                  boxSizing="content-box">
                   <Link href="https://github.com/VinayakDubey07/crypto-news-app" isExternal>
-                  Cryptocurrency News App
+                    Cryptocurrency News App
                   </Link>
                 </Text>
               </Stack>
@@ -285,33 +279,33 @@ export default function Header() {
               </Badge>
               <Stack as={Box} marginY="5" spacing="5">
                 <Text fontWeight={300}
-                fontFamily="mono"
-                fontSize={{ md: 'large' }}
-                marginX="1"
-                boxSizing="content-box">
+                  fontFamily="mono"
+                  fontSize={{ md: 'large' }}
+                  marginX="1"
+                  boxSizing="content-box">
                   <Link href="https://github.com/VinayakDubey07" isExternal>
                     <Icon as={FiGithub} /> @Github
                   </Link>
                 </Text>
                 <Text fontWeight={300}
-                fontFamily="mono"
-                fontSize={{ md: 'large' }}
-                marginX="1"
-                boxSizing="content-box">
+                  fontFamily="mono"
+                  fontSize={{ md: 'large' }}
+                  marginX="1"
+                  boxSizing="content-box">
                   <Link href="https://linkedin.com/in/vinayaksde" isExternal>
                     <Icon as={FiLinkedin} /> @LinkedIn
                   </Link>
                 </Text>
                 <Text fontWeight={300}
-                fontFamily="mono"
-                fontSize={{ md: 'large' }}
-                marginX="1"
-                boxSizing="content-box">
+                  fontFamily="mono"
+                  fontSize={{ md: 'large' }}
+                  marginX="1"
+                  boxSizing="content-box">
                   <Link href="https://medium.com/@vinayakdubey.is20" isExternal>
                     <Icon as={SiMedium} /> @Medium
                   </Link>
                 </Text>
-                
+
               </Stack>
               <Text marginTop="6" fontFamily="mono">
                 Get in touch <span>👉</span>{' '}
