@@ -26,7 +26,7 @@ import {
   FaUbuntu,
   FaGitlab,
 } from 'react-icons/fa'
-import {  SiGraphql, SiTensorflow, SiKeras, SiPandas, SiNumpy, SiScikitlearn, SiCplusplus, SiPython, SiNextdotjs,SiBootstrap, SiMysql, SiNetlify, SiVercel, SiBlockchaindotcom, } from 'react-icons/si'
+import {  SiGraphql, SiTensorflow, SiKeras, SiPandas, SiNumpy, SiScikitlearn, SiCplusplus, SiPython, SiNextdotjs,SiBootstrap, SiMysql, SiNetlify, SiVercel, SiBlockchaindotcom, SiMedium} from 'react-icons/si'
 
 import '../index.css'
 
@@ -302,6 +302,16 @@ export default function Header() {
                     <Icon as={FiLinkedin} /> @LinkedIn
                   </Link>
                 </Text>
+                <Text fontWeight={300}
+                fontFamily="mono"
+                fontSize={{ md: 'large' }}
+                marginX="1"
+                boxSizing="content-box">
+                  <Link href="https://medium.com/@vinayakdubey.is20" isExternal>
+                    <Icon as={SiMedium} /> @Medium
+                  </Link>
+                </Text>
+                
               </Stack>
               <Text marginTop="6" fontFamily="mono">
                 Get in touch <span>👉</span>{' '}
