@@ -73,7 +73,7 @@ export default function Header() {
                 boxSizing="content-box"
               >
                 <span className="highlighted-word">
-                  Upcoming Associate Application Developer @Oracle
+                  Software Developer Intern @Oracle
                 </span>
               </Text>
             </Box>
