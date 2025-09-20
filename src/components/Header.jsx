@@ -11,7 +11,13 @@ import {
   Badge,
   Img,
 } from '@chakra-ui/react'
-import { FiGithub, FiLinkedin, FiDatabase, FiServer, FiLayers } from 'react-icons/fi'
+import {
+  FiGithub,
+  FiLinkedin,
+  FiDatabase,
+  FiServer,
+  FiLayers,
+} from 'react-icons/fi'
 import { SiOpenai, SiMongodb, SiElastic, SiAmazonaws } from 'react-icons/si'
 import {
   FaCss3,
@@ -23,6 +29,7 @@ import {
   FaUbuntu,
   FaGitlab,
   FaJenkins,
+  // eslint-disable-next-line prettier/prettier
 } from 'react-icons/fa'
 import {
   SiGraphql,
@@ -105,7 +112,8 @@ export default function Header() {
                 boxSizing="content-box"
               >
                 <span className="highlighted-word">
-                  Driving the future of AI-powered applications beyond traditional limits.
+                  Driving the future of AI-powered applications beyond
+                  traditional limits.
                 </span>
                 , <span className="highlighted-word">Software Developer</span>{' '}
                 and <span className="highlighted-word">Tech Enthusiast</span>.
@@ -147,7 +155,6 @@ export default function Header() {
                   <Icon as={SiMysql} />
                 </Link>
               </Stack>
-
               {/* Frameworks Section */}
               <Badge
                 as="a"
