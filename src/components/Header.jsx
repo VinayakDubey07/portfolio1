@@ -112,7 +112,7 @@ export default function Header() {
                 boxSizing="content-box"
               >
                 <span className="highlighted-word">
-                 Playing 4D Chess with AI
+                  Playing 4D Chess with AI
                 </span>
               </Text>
             </Box>
