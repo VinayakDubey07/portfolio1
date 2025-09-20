@@ -428,8 +428,8 @@ export default function Header() {
               {/* Contact Section */}
               <Text marginTop="6" fontFamily="mono">
                 Get in touch <span>👉</span>{' '}
-                <a className="mail" href="mailto:contact@vinayak.cloud">
-                  contact@vinayak.cloud
+                <a className="mail" href="mailto:vinayak.d.dubey@oracle.com">
+                  vinayak@oracle.com
                 </a>
               </Text>
             </Box>
