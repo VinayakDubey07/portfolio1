@@ -11,7 +11,9 @@ import {
   Badge,
   Img,
 } from '@chakra-ui/react'
-import { FiGithub, FiLinkedin } from 'react-icons/fi'
+import { FiGithub, FiLinkedin, FiDatabase, FiServer, FiLayers } from 'react-icons/fi'
+//import { SiOpenai, SiMongodb, SiElastic, SiAmazonaws } from 'react-icons/si'
+import { SiOpenai, SiMongodb, SiElastic, SiAmazonaws } from 'react-icons/si'
 import {
   FaCss3,
   FaHtml5,
@@ -21,9 +23,27 @@ import {
   FaGithub,
   FaUbuntu,
   FaGitlab,
+  FaJenkins
 } from 'react-icons/fa'
-import { SiGraphql, SiTensorflow, SiKeras, SiPandas, SiNumpy, SiScikitlearn, SiCplusplus, SiPython, SiNextdotjs, SiBootstrap, SiMysql, SiNetlify, SiVercel, SiBlockchaindotcom, SiMedium} from 'react-icons/si'
+import {
+  SiGraphql,
+  SiTensorflow,
+  SiKeras,
+  SiPandas,
+  SiNumpy,
+  SiScikitlearn,
+  SiCplusplus,
+  SiPython,
+  SiNextdotjs,
+  SiBootstrap,
+  SiMysql,
+  SiNetlify,
+  SiVercel,
+  SiBlockchaindotcom,
+  SiMedium,
+} from 'react-icons/si'
 import '../index.css'
+
 export default function Header() {
   return (
     <>
@@ -73,7 +93,7 @@ export default function Header() {
                 boxSizing="content-box"
               >
                 <span className="highlighted-word">
-                  Software Developer Intern @Oracle
+                  Software Developer @Oracle
                 </span>
               </Text>
             </Box>
@@ -86,13 +106,14 @@ export default function Header() {
                 boxSizing="content-box"
               >
                 <span className="highlighted-word">
-                  Information Science Engineering Student
+                  Driving the future of AI-powered applications beyond traditional limits.
                 </span>
                 , <span className="highlighted-word">Software Developer</span>{' '}
                 and <span className="highlighted-word">Tech Enthusiast</span>.
               </Text>
             </Box>
             <Box justifyContent="center">
+              {/* Languages Section */}
               <Badge
                 as="a"
                 variant="outline"
@@ -109,6 +130,7 @@ export default function Header() {
                 wrap="wrap"
                 fontSize="3.2rem"
                 spacing="6"
+                marginBottom="8"
               >
                 <Link pointerEvents="none" as="span">
                   <Icon as={SiCplusplus} />
@@ -125,8 +147,9 @@ export default function Header() {
                 <Link pointerEvents="none">
                   <Icon as={SiMysql} />
                 </Link>
-
               </Stack>
+
+              {/* Frameworks Section */}
               <Badge
                 as="a"
                 variant="outline"
@@ -143,9 +166,8 @@ export default function Header() {
                 wrap="wrap"
                 fontSize="3.2rem"
                 spacing="6"
+                marginBottom="8"
               >
-
-
                 <Link pointerEvents="none">
                   <Icon as={FaCss3} />
                 </Link>
@@ -162,6 +184,8 @@ export default function Header() {
                   <Icon as={FaReact} />
                 </Link>
               </Stack>
+
+              {/* Developer Tools Section */}
               <Badge
                 as="a"
                 variant="outline"
@@ -178,11 +202,11 @@ export default function Header() {
                 wrap="wrap"
                 fontSize="3.2rem"
                 spacing="6"
+                marginBottom="8"
               >
                 <Link pointerEvents="none" as="span">
                   <Icon as={FaGithub} />
                 </Link>
-
                 <Link pointerEvents="none" as="span">
                   <Icon as={FaUbuntu} />
                 </Link>
@@ -190,13 +214,14 @@ export default function Header() {
                   <Icon as={FaGitlab} />
                 </Link>
                 <Link pointerEvents="none" as="span">
-                  <Icon as={SiVercel} />
+                  <Icon as={FaJenkins} />
                 </Link>
                 <Link pointerEvents="none" as="span">
                   <Icon as={SiNetlify} />
                 </Link>
-
               </Stack>
+
+              {/* Libraries Section */}
               <Badge
                 as="a"
                 variant="outline"
@@ -213,6 +238,7 @@ export default function Header() {
                 wrap="wrap"
                 fontSize="3.2rem"
                 spacing="6"
+                marginBottom="8"
               >
                 <Link pointerEvents="none" as="span">
                   <Icon as={SiTensorflow} />
@@ -230,83 +256,176 @@ export default function Header() {
                   <Icon as={SiScikitlearn} />
                 </Link>
               </Stack>
+
+              {/* AI/ML Skills Section */}
               <Badge
                 as="a"
                 variant="outline"
-                marginBottom="2"
+                marginBottom="5"
+                fontSize="1.2rem"
+                fontFamily="mono"
+              >
+                AI/ML Skills
+              </Badge>
+              <Stack
+                paddingX="14"
+                justify="center"
+                direction="row"
+                wrap="wrap"
+                fontSize="3.2rem"
+                spacing="6"
+                marginBottom="8"
+              >
+                <Link pointerEvents="none" as="span">
+                  <Icon as={SiOpenai} />
+                </Link>
+                <Link pointerEvents="none" as="span">
+                  <Icon as={SiMongodb} />
+                </Link>
+                <Link pointerEvents="none" as="span">
+                  <Icon as={SiElastic} />
+                </Link>
+                <Link pointerEvents="none" as="span">
+                  <Icon as={SiAmazonaws} />
+                </Link>
+              </Stack>
+
+              {/* Projects Section */}
+              <Badge
+                as="a"
+                variant="outline"
+                marginBottom="5"
                 fontSize="1.2rem"
                 fontFamily="mono"
               >
                 Projects
               </Badge>
-              <Stack as={Box} marginY="5" spacing="5">
-                <Text fontWeight={300}
+              <Stack as={Box} marginY="5" spacing="5" marginBottom="8">
+                <Text
+                  fontWeight={300}
                   fontFamily="mono"
                   fontSize={{ md: 'large' }}
                   marginX="1"
-                  boxSizing="content-box">
-                  <Link href="https://github.com/VinayakDubey07/Decentralised-Image-Sharing-And-Storing-System" isExternal>
+                  boxSizing="content-box"
+                >
+                  <Link
+                    href="https://github.com/VinayakDubey07/Decentralised-Image-Sharing-And-Storing-System"
+                    isExternal
+                  >
                     Decentralized Image Storing and Sharing System
                   </Link>
                 </Text>
-                <Text fontWeight={300}
+                <Text
+                  fontWeight={300}
                   fontFamily="mono"
                   fontSize={{ md: 'large' }}
                   marginX="1"
-                  boxSizing="content-box">
+                  boxSizing="content-box"
+                >
                   <Link href="https://shortthebig.netlify.app/" isExternal>
                     Article Summarizer
                   </Link>
                 </Text>
-                <Text fontWeight={300}
+                <Text
+                  fontWeight={300}
                   fontFamily="mono"
                   fontSize={{ md: 'large' }}
                   marginX="1"
-                  boxSizing="content-box">
-                  <Link href="https://github.com/VinayakDubey07/crypto-news-app" isExternal>
-                    Cryptocurrency News App
+                  boxSizing="content-box"
+                >
+                  <Link
+                    href="https://github.com/VinayakDubey07/Chat-app-Blockchain"
+                    isExternal
+                  >
+                    Multichat application using Blockchain and Gunjs
                   </Link>
                 </Text>
               </Stack>
+ {/* Algorithms Section */}
               <Badge
                 as="a"
                 variant="outline"
-                marginBottom="2"
+                marginBottom="5"
+                fontSize="1.2rem"
+                fontFamily="mono"
+              >
+                Algorithms
+              </Badge>
+              <Stack as={Box} marginY="5" spacing="5" marginBottom="8">
+                <Text
+                  fontWeight={300}
+                  fontFamily="mono"
+                  fontSize={{ md: 'large' }}
+                  marginX="1"
+                  boxSizing="content-box"
+                >
+                  <Link
+                    href="https://github.com/VinayakDubey07/splitwise-algorithm"
+                    isExternal
+                  >
+                    SplitWise Algorithm
+                  </Link>
+                </Text>
+                <Text
+                  fontWeight={300}
+                  fontFamily="mono"
+                  fontSize={{ md: 'large' }}
+                  marginX="1"
+                  boxSizing="content-box"
+                >
+                  <Link href="https://github.com/VinayakDubey07/File-zipper/tree/main" isExternal>
+                    File Zipper using Huffman Encoding
+                  </Link>
+                </Text>
+                
+              </Stack>
+              {/* On the web Section */}
+              <Badge
+                as="a"
+                variant="outline"
+                marginBottom="5"
                 fontSize="1.2rem"
                 fontFamily="mono"
               >
                 On the web
               </Badge>
-              <Stack as={Box} marginY="5" spacing="5">
-                <Text fontWeight={300}
+              <Stack as={Box} marginY="5" spacing="5" marginBottom="6">
+                <Text
+                  fontWeight={300}
                   fontFamily="mono"
                   fontSize={{ md: 'large' }}
                   marginX="1"
-                  boxSizing="content-box">
+                  boxSizing="content-box"
+                >
                   <Link href="https://github.com/VinayakDubey07" isExternal>
                     <Icon as={FiGithub} /> @Github
                   </Link>
                 </Text>
-                <Text fontWeight={300}
+                <Text
+                  fontWeight={300}
                   fontFamily="mono"
                   fontSize={{ md: 'large' }}
                   marginX="1"
-                  boxSizing="content-box">
+                  boxSizing="content-box"
+                >
                   <Link href="https://linkedin.com/in/vinayaksde" isExternal>
                     <Icon as={FiLinkedin} /> @LinkedIn
                   </Link>
                 </Text>
-                <Text fontWeight={300}
+                <Text
+                  fontWeight={300}
                   fontFamily="mono"
                   fontSize={{ md: 'large' }}
                   marginX="1"
-                  boxSizing="content-box">
+                  boxSizing="content-box"
+                >
                   <Link href="https://medium.com/@vinayakdubey.is20" isExternal>
                     <Icon as={SiMedium} /> @Medium
                   </Link>
                 </Text>
-
               </Stack>
+
+              {/* Contact Section */}
               <Text marginTop="6" fontFamily="mono">
                 Get in touch <span>👉</span>{' '}
                 <a className="mail" href="mailto:contact@vinayak.cloud">
