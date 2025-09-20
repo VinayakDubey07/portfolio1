@@ -12,7 +12,6 @@ import {
   Img,
 } from '@chakra-ui/react'
 import { FiGithub, FiLinkedin, FiDatabase, FiServer, FiLayers } from 'react-icons/fi'
-//import { SiOpenai, SiMongodb, SiElastic, SiAmazonaws } from 'react-icons/si'
 import { SiOpenai, SiMongodb, SiElastic, SiAmazonaws } from 'react-icons/si'
 import {
   FaCss3,
@@ -23,7 +22,7 @@ import {
   FaGithub,
   FaUbuntu,
   FaGitlab,
-  FaJenkins
+  FaJenkins,
 } from 'react-icons/fa'
 import {
   SiGraphql,
@@ -59,6 +58,7 @@ export default function Header() {
               <Img
                 borderRadius="full"
                 src="https://i.ibb.co/svMfvx1/avatar.png"
+                alt="Vinayak Avatar"
               />
             </Box>
             <Box
@@ -86,9 +86,8 @@ export default function Header() {
             <Box alignItems="center">
               <Text
                 fontWeight={500}
-                fontSize={{ base: 20, md: 40 }}
-                fontFamily="mono"
                 fontSize={{ md: 'large' }}
+                fontFamily="mono"
                 marginX="1"
                 boxSizing="content-box"
               >
@@ -135,16 +134,16 @@ export default function Header() {
                 <Link pointerEvents="none" as="span">
                   <Icon as={SiCplusplus} />
                 </Link>
-                <Link pointerEvents="none">
+                <Link pointerEvents="none" as="span">
                   <Icon as={SiPython} />
                 </Link>
-                <Link pointerEvents="none">
+                <Link pointerEvents="none" as="span">
                   <Icon as={FaJs} />
                 </Link>
-                <Link pointerEvents="none">
+                <Link pointerEvents="none" as="span">
                   <Icon as={FaHtml5} />
                 </Link>
-                <Link pointerEvents="none">
+                <Link pointerEvents="none" as="span">
                   <Icon as={SiMysql} />
                 </Link>
               </Stack>
@@ -168,19 +167,19 @@ export default function Header() {
                 spacing="6"
                 marginBottom="8"
               >
-                <Link pointerEvents="none">
+                <Link pointerEvents="none" as="span">
                   <Icon as={FaCss3} />
                 </Link>
-                <Link pointerEvents="none">
+                <Link pointerEvents="none" as="span">
                   <Icon as={SiBootstrap} />
                 </Link>
-                <Link pointerEvents="none">
+                <Link pointerEvents="none" as="span">
                   <Icon as={FaNodeJs} />
                 </Link>
-                <Link pointerEvents="none">
+                <Link pointerEvents="none" as="span">
                   <Icon as={SiNextdotjs} />
                 </Link>
-                <Link pointerEvents="none">
+                <Link pointerEvents="none" as="span">
                   <Icon as={FaReact} />
                 </Link>
               </Stack>
@@ -341,7 +340,8 @@ export default function Header() {
                   </Link>
                 </Text>
               </Stack>
- {/* Algorithms Section */}
+
+              {/* Algorithms Section */}
               <Badge
                 as="a"
                 variant="outline"
@@ -373,12 +373,15 @@ export default function Header() {
                   marginX="1"
                   boxSizing="content-box"
                 >
-                  <Link href="https://github.com/VinayakDubey07/File-zipper/tree/main" isExternal>
+                  <Link
+                    href="https://github.com/VinayakDubey07/File-zipper/tree/main"
+                    isExternal
+                  >
                     File Zipper using Huffman Encoding
                   </Link>
                 </Text>
-                
               </Stack>
+
               {/* On the web Section */}
               <Badge
                 as="a"
