@@ -112,11 +112,8 @@ export default function Header() {
                 boxSizing="content-box"
               >
                 <span className="highlighted-word">
-                  Driving the future of AI-powered applications beyond
-                  traditional limits.
+                 Playing 4D Chess with AI
                 </span>
-                , <span className="highlighted-word">Software Developer</span>{' '}
-                and <span className="highlighted-word">Tech Enthusiast</span>.
               </Text>
             </Box>
             <Box justifyContent="center">
