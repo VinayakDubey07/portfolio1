@@ -211,8 +211,8 @@ Medium      medium.com/@vinayakdubey.is20
 
 Location
 ────────
-Amsterdam, Netherlands
-Available for remote collaboration
+Bengaluru, India
+Available for exciting projects.
 
 ────────────────────────────────────────────────────────────────
 
