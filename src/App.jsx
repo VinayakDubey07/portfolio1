@@ -13,24 +13,24 @@ export default function Portfolio() {
   }, []);
 
   const sections = {
-    intro: `VINAYAK DUBEY
+    intro: `Vinayak Dubey
 ═════════════
 
 Software Developer @ Oracle
-Amsterdam, Netherlands
+Bengaluru, India
 
 ────────────────────────────────────────────────────────────────
 
 Building robust, scalable systems at the intersection of 
-blockchain technology, artificial intelligence, and distributed 
+Artificial Intelligence and Distributed 
 computing. Focused on delivering high-quality solutions that 
 solve complex engineering challenges.`,
 
     about: `PROFESSIONAL SUMMARY
 ════════════════════
 
-Senior Software Developer at Oracle with demonstrated expertise 
-in full-stack development, blockchain architecture, and machine 
+Software Developer at Oracle with demonstrated expertise 
+in full-stack development, database development, and machine 
 learning systems. 
 
 Track record of designing and implementing scalable enterprise 
@@ -47,15 +47,15 @@ that serve users at scale.`,
 
 Software Developer
 Oracle Corporation
-2024 - Present | Amsterdam, Netherlands
+2024 - Present | Bengaluru, India
 
-• Architecting and developing enterprise-scale applications 
+• Ddeveloping enterprise-scale applications 
   with focus on reliability and performance
   
-• Implementing microservices architecture and distributed 
+• Implementing API's and distributed 
   systems using modern cloud technologies
   
-• Contributing to critical backend infrastructure serving 
+• Contributing to ODI/Database development serving 
   millions of users globally
   
 • Collaborating with cross-functional teams on system design 
@@ -81,7 +81,8 @@ Cloud:       AWS · Netlify · Vercel
 Machine Learning & AI
 ─────────────────────
 TensorFlow · Keras · Scikit-learn
-Pandas · NumPy · OpenAI API
+Pandas · NumPy · Natural Language Processing (NLP)
+Advanced Mathematics and Algorithm Knowledge
 
 Blockchain & Web3
 ─────────────────
@@ -268,7 +269,7 @@ Response time: Within 24-48 hours`
             flexShrink: 0
           }}>
             <img 
-              src="https://i.ibb.co/svMfvx1/1000108932.jpg" 
+              src="/1000108932.jpg"
               alt="Vinayak Dubey"
               style={{
                 width: '100%',
@@ -285,7 +286,7 @@ Response time: Within 24-48 hours`
               marginBottom: '8px',
               letterSpacing: '1px'
             }}>
-              PORTFOLIO v2.0
+              Hi There 👋
             </div>
             <div style={{
               fontSize: '11px',
