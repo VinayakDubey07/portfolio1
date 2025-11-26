@@ -1,16 +1,16 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react'
 
 export default function Portfolio() {
-  const [activeSection, setActiveSection] = useState('intro');
-  const [cursorVisible, setCursorVisible] = useState(true);
+  const [activeSection, setActiveSection] = useState('intro')
+  const [cursorVisible, setCursorVisible] = useState(true)
 
   // Blinking cursor effect
   useEffect(() => {
     const interval = setInterval(() => {
-      setCursorVisible(prev => !prev);
-    }, 530);
-    return () => clearInterval(interval);
-  }, []);
+      setCursorVisible(prev => !prev)
+    }, 530)
+    return () => clearInterval(interval)
+  }, [])
 
   const sections = {
     intro: `Vinayak Dubey
@@ -222,8 +222,8 @@ Open to discussing:
 • Speaking engagements
 • Technical consulting
 
-Response time: Within 24-48 hours`
-  };
+Response time: Within 24-48 hours`,
+  }
 
   const menuItems = [
     { key: 'intro', label: 'HOME' },
@@ -233,80 +233,94 @@ Response time: Within 24-48 hours`
     { key: 'projects', label: 'PROJECTS' },
     { key: 'algorithms', label: 'ALGORITHMS' },
     { key: 'publications', label: 'PUBLICATIONS' },
-    { key: 'contact', label: 'CONTACT' }
-  ];
+    { key: 'contact', label: 'CONTACT' },
+  ]
 
   return (
-    <div style={{
-      minHeight: '100vh',
-      backgroundColor: '#000000',
-      color: '#FFFFFF',
-      fontFamily: '"Courier New", Courier, monospace',
-      padding: '40px 20px',
-      lineHeight: '1.7',
-      letterSpacing: '0.3px'
-    }}>
-      <div style={{
-        maxWidth: '900px',
-        margin: '0 auto'
-      }}>
+    <div
+      style={{
+        minHeight: '100vh',
+        backgroundColor: '#000000',
+        color: '#FFFFFF',
+        fontFamily: '"Courier New", Courier, monospace',
+        padding: '40px 20px',
+        lineHeight: '1.7',
+        letterSpacing: '0.3px',
+      }}
+    >
+      <div
+        style={{
+          maxWidth: '900px',
+          margin: '0 auto',
+        }}
+      >
         {/* Header with photo */}
-        <div style={{
-          marginBottom: '50px',
-          paddingBottom: '30px',
-          borderBottom: '2px solid #333',
-          display: 'flex',
-          alignItems: 'center',
-          gap: '30px',
-          flexWrap: 'wrap'
-        }}>
-          <div style={{
-            width: '120px',
-            height: '120px',
-            borderRadius: '50%',
-            overflow: 'hidden',
-            border: '2px solid #444',
-            flexShrink: 0
-          }}>
-            <img 
+        <div
+          style={{
+            marginBottom: '50px',
+            paddingBottom: '30px',
+            borderBottom: '2px solid #333',
+            display: 'flex',
+            alignItems: 'center',
+            gap: '30px',
+            flexWrap: 'wrap',
+          }}
+        >
+          <div
+            style={{
+              width: '120px',
+              height: '120px',
+              borderRadius: '50%',
+              overflow: 'hidden',
+              border: '2px solid #444',
+              flexShrink: 0,
+            }}
+          >
+            <img
               src="/1000108932.jpg"
               alt="Vinayak Dubey"
               style={{
                 width: '100%',
                 height: '100%',
                 objectFit: 'cover',
-                display: 'block'
+                display: 'block',
               }}
             />
           </div>
           <div style={{ flex: 1 }}>
-            <div style={{
-              fontSize: '13px',
-              color: '#888',
-              marginBottom: '8px',
-              letterSpacing: '1px'
-            }}>
+            <div
+              style={{
+                fontSize: '13px',
+                color: '#888',
+                marginBottom: '8px',
+                letterSpacing: '1px',
+              }}
+            >
               Hi There 👋
             </div>
-            <div style={{
-              fontSize: '11px',
-              color: '#666',
-              fontStyle: 'italic'
-            }}>
+            <div
+              style={{
+                fontSize: '11px',
+                color: '#666',
+                fontStyle: 'italic',
+              }}
+            >
               Last updated: November 2025
             </div>
           </div>
         </div>
 
         {/* Navigation */}
-        <nav style={{
-          marginBottom: '50px',
-          display: 'flex',
-          flexWrap: 'wrap',
-          gap: '25px',
-          fontSize: '13px',
-          letterSpacing: '1.5px'
-        }}>
+        <nav
+          style={{
+            marginBottom: '50px',
+            display: 'flex',
+            flexWrap: 'wrap',
+            gap: '25px',
+            fontSize: '13px',
+            letterSpacing: '1.5px',
+          }}
+        >
           {menuItems.map(item => (
             <button
               key={item.key}
@@ -321,11 +335,11 @@ Response time: Within 24-48 hours`
                 padding: '0',
                 fontWeight: activeSection === item.key ? 'bold' : 'normal',
                 transition: 'color 0.2s',
-                letterSpacing: '1.5px'
+                letterSpacing: '1.5px',
               }}
-              onMouseEnter={(e) => e.target.style.color = '#FFFFFF'}
-              onMouseLeave={(e) => {
-                if (activeSection !== item.key) e.target.style.color = '#666';
+              onMouseEnter={e => (e.target.style.color = '#FFFFFF')}
+              onMouseLeave={e => {
+                if (activeSection !== item.key) e.target.style.color = '#666'
               }}
             >
               {item.label}
@@ -334,19 +348,25 @@ Response time: Within 24-48 hours`
         </nav>
 
         {/* Content */}
-        <main style={{
-          fontSize: '14px',
-          whiteSpace: 'pre-wrap',
-          wordWrap: 'break-word',
-          minHeight: '400px'
-        }}>
+        <main
+          style={{
+            fontSize: '14px',
+            whiteSpace: 'pre-wrap',
+            wordWrap: 'break-word',
+            minHeight: '400px',
+          }}
+        >
           {sections[activeSection].split('\n').map((line, index) => {
             // Check if line contains a URL
-            const urlMatch = line.match(/((?:https?:\/\/)?(?:www\.)?[a-zA-Z0-9-]+\.[a-zA-Z]{2,}(?:\/[^\s]*)?)/);
-            
+            const urlMatch = line.match(
+              /((?:https?:\/\/)?(?:www\.)?[a-zA-Z0-9-]+\.[a-zA-Z]{2,}(?:\/[^\s]*)?)/
+            )
+
             if (urlMatch) {
-              const parts = line.split(urlMatch[0]);
-              const url = urlMatch[0].startsWith('http') ? urlMatch[0] : `https://${urlMatch[0]}`;
+              const parts = line.split(urlMatch[0])
+              const url = urlMatch[0].startsWith('http')
+                ? urlMatch[0]
+                : `https://${urlMatch[0]}`
               return (
                 <div key={index} style={{ marginBottom: '4px' }}>
                   {parts[0]}
@@ -357,40 +377,46 @@ Response time: Within 24-48 hours`
                     style={{
                       color: '#888',
                       textDecoration: 'underline',
-                      transition: 'color 0.2s'
+                      transition: 'color 0.2s',
                     }}
-                    onMouseEnter={(e) => e.target.style.color = '#FFFFFF'}
-                    onMouseLeave={(e) => e.target.style.color = '#888'}
+                    onMouseEnter={e => (e.target.style.color = '#FFFFFF')}
+                    onMouseLeave={e => (e.target.style.color = '#888')}
                   >
                     {urlMatch[0]}
                   </a>
                   {parts[1]}
                 </div>
-              );
+              )
             }
-            
+
             return (
               <div key={index} style={{ marginBottom: '4px' }}>
                 {line || '\u00A0'}
               </div>
-            );
+            )
           })}
-          <span style={{
-            opacity: cursorVisible ? 1 : 0,
-            transition: 'opacity 0.1s'
-          }}>▋</span>
+          <span
+            style={{
+              opacity: cursorVisible ? 1 : 0,
+              transition: 'opacity 0.1s',
+            }}
+          >
+            ▋
+          </span>
         </main>
 
         {/* Footer */}
-        <footer style={{
-          marginTop: '80px',
-          paddingTop: '30px',
-          borderTop: '2px solid #333',
-          fontSize: '11px',
-          color: '#666',
-          textAlign: 'center',
-          letterSpacing: '1px'
-        }}>
+        <footer
+          style={{
+            marginTop: '80px',
+            paddingTop: '30px',
+            borderTop: '2px solid #333',
+            fontSize: '11px',
+            color: '#666',
+            textAlign: 'center',
+            letterSpacing: '1px',
+          }}
+        >
           <div style={{ marginBottom: '10px' }}>
             © 2025 VINAYAK DUBEY · ALL RIGHTS RESERVED
           </div>
@@ -400,5 +426,5 @@ Response time: Within 24-48 hours`
         </footer>
       </div>
     </div>
-  );
+  )
 }
