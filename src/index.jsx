@@ -1,7 +1,7 @@
 import { ColorModeScript } from '@chakra-ui/react'
 import React, { StrictMode } from 'react'
 import App from './App'
-import './index.css'
+
 
 import ReactDOM from 'react-dom/client'
 
