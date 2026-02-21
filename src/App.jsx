@@ -1,238 +1,137 @@
 import React, { useState, useEffect, useRef } from 'react'
 
-// --- THEME (Strict Black & White) ---
+// --- THEME ---
 const theme = {
   bg: '#000000',
+  surface: '#0a0a0a',
   text: '#FFFFFF',
-  dim: '#888888',
-  darkGray: '#333333',
+  dim: '#666666',
+  dimmer: '#333333',
+  accent: '#FFFFFF',
   font: '"JetBrains Mono", "Courier New", monospace',
 }
 
-// --- STYLES ---
-const styles = {
-  container: {
-    minHeight: '100vh',
-    backgroundColor: theme.bg,
-    color: theme.text,
-    fontFamily: theme.font,
-    padding: '40px 20px',
-    lineHeight: '1.6',
-    letterSpacing: '0.5px',
-  },
-  inner: {
-    maxWidth: '900px',
-    margin: '0 auto',
-  },
-  header: {
-    display: 'flex',
-    gap: '40px',
-    alignItems: 'center',
-    marginBottom: '60px',
-    flexWrap: 'wrap',
-    borderBottom: `1px solid ${theme.darkGray}`,
-    paddingBottom: '40px',
-  },
-  photoFrame: {
-    width: '120px',
-    height: '120px',
-  },
-  photo: {
-    width: '100%',
-    height: '100%',
-    objectFit: 'cover',
-    border: `1px solid ${theme.darkGray}`,
-    filter: 'grayscale(100%) contrast(1.2)',
-  },
-  nav: {
-    display: 'flex',
-    flexWrap: 'wrap',
-    gap: '5px',
-    marginBottom: '40px',
-  },
-  navButton: active => ({
-    background: active ? theme.text : 'transparent',
-    color: active ? theme.bg : theme.dim,
-    border: `1px solid ${active ? theme.text : 'transparent'}`,
-    cursor: 'pointer',
-    padding: '8px 16px',
-    fontSize: '13px',
-    fontFamily: 'inherit',
-    fontWeight: 'bold',
-    transition: 'all 0.2s ease',
-    textTransform: 'uppercase',
-  }),
-  contentBox: {
-    minHeight: '400px',
-    padding: '10px 0',
-  },
-  link: {
-    color: theme.text,
-    textDecoration: 'underline',
-    textUnderlineOffset: '4px',
-    cursor: 'pointer',
-    transition: 'opacity 0.2s',
-  },
-  cliBar: {
-    marginTop: '80px',
-    paddingTop: '20px',
-    borderTop: `1px solid ${theme.darkGray}`,
-    fontFamily: theme.font,
-    fontSize: '12px',
-    color: theme.dim,
-    display: 'flex',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-  },
-  // Game Styles
-  gameBoard: {
-    display: 'grid',
-    gridTemplateColumns: 'repeat(3, 1fr)',
-    gap: '2px',
-    maxWidth: '300px',
-    margin: '40px auto',
-    backgroundColor: theme.darkGray,
-    border: `2px solid ${theme.darkGray}`,
-  },
-  gameCell: {
-    aspectRatio: '1/1',
-    backgroundColor: theme.bg,
-    border: 'none',
-    color: theme.text,
-    fontSize: '32px',
-    fontFamily: theme.font,
-    cursor: 'pointer',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  gameStatus: {
-    textAlign: 'center',
-    marginTop: '20px',
-    fontSize: '14px',
-    color: theme.dim,
-  },
-  resetBtn: {
-    display: 'block',
-    margin: '20px auto',
-    background: 'transparent',
-    color: theme.text,
-    border: `1px solid ${theme.text}`,
-    padding: '8px 16px',
-    fontFamily: theme.font,
-    cursor: 'pointer',
-  },
-  // Chat Styles
-  chatContainer: {
-    border: `1px solid ${theme.darkGray}`,
-    padding: '20px',
-    height: '450px',
-    display: 'flex',
-    flexDirection: 'column',
-    position: 'relative',
-    background: '#0a0a0a',
-  },
-  chatHistory: {
-    flex: 1,
-    overflowY: 'auto',
-    marginBottom: '20px',
-    fontFamily: theme.font,
-    fontSize: '14px',
-  },
-  chatInput: {
-    background: 'transparent',
-    border: 'none',
-    borderTop: `1px solid ${theme.darkGray}`,
-    color: theme.text,
-    fontFamily: theme.font,
-    fontSize: '16px',
-    padding: '15px 0',
-    width: '100%',
-    outline: 'none',
-  },
-}
+// --- GLOBAL CSS ---
+const GlobalStyles = () => (
+  <style>{`
+    @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;700&display=swap');
+    *, *::before, *::after { box-sizing: border-box; }
+    body, html { margin: 0; padding: 0; background: #000; }
+    ::selection { background: #fff; color: #000; }
+    ::-webkit-scrollbar { width: 4px; }
+    ::-webkit-scrollbar-track { background: #000; }
+    ::-webkit-scrollbar-thumb { background: #333; }
+    @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0} }
+    @keyframes fadeUp { from{opacity:0;transform:translateY(8px)} to{opacity:1;transform:translateY(0)} }
+    @keyframes scanline {
+      0% { transform: translateY(-100%); }
+      100% { transform: translateY(100vh); }
+    }
+    .cursor {
+      display: inline-block; width: 8px; height: 16px;
+      background: #fff; vertical-align: text-bottom;
+      margin-left: 2px; animation: blink 1s step-end infinite;
+    }
+    .fade-up { animation: fadeUp 0.4s ease forwards; }
+    .nav-btn {
+      background: transparent; color: #555; border: none;
+      cursor: pointer; padding: 6px 14px; font-family: inherit;
+      font-size: 12px; font-weight: 500; letter-spacing: 1.5px;
+      text-transform: uppercase; transition: color 0.2s, border-color 0.2s;
+      border-bottom: 1px solid transparent;
+    }
+    .nav-btn:hover { color: #aaa; }
+    .nav-btn.active { color: #fff; border-bottom-color: #fff; }
+    .project-card {
+      border: 1px solid #1a1a1a; padding: 20px; cursor: pointer;
+      transition: border-color 0.2s, background 0.2s;
+      animation: fadeUp 0.4s ease forwards;
+    }
+    .project-card:hover { border-color: #444; background: #0d0d0d; }
+    .chat-msg { animation: fadeUp 0.3s ease forwards; }
+    a { color: #fff; text-decoration: underline; text-underline-offset: 3px; }
+    a:hover { opacity: 0.7; }
+    .scanline {
+      position: fixed; top: 0; left: 0; right: 0; height: 2px;
+      background: rgba(255,255,255,0.03); pointer-events: none;
+      animation: scanline 8s linear infinite; z-index: 9999;
+    }
+    .tag {
+      display: inline-block; font-size: 10px; letter-spacing: 1px;
+      padding: 2px 6px; border: 1px solid #2a2a2a; color: #555;
+      margin: 2px; text-transform: uppercase;
+    }
+    .reset-btn {
+      background: transparent; color: #fff; border: 1px solid #333;
+      padding: 8px 20px; font-family: inherit; font-size: 12px;
+      cursor: pointer; letter-spacing: 1px; transition: border-color 0.2s;
+    }
+    .reset-btn:hover { border-color: #fff; }
+    .game-cell {
+      aspect-ratio: 1; background: #000; border: none;
+      color: #fff; font-family: inherit; font-size: 28px;
+      cursor: pointer; display: flex; align-items: center;
+      justify-content: center; transition: background 0.15s;
+    }
+    .game-cell:hover:not(:disabled) { background: #0d0d0d; }
+    .send-btn {
+      background: #fff; color: #000; border: none; padding: 8px 16px;
+      font-family: inherit; font-size: 12px; font-weight: 700;
+      letter-spacing: 1px; cursor: pointer; flex-shrink: 0;
+      transition: opacity 0.2s;
+    }
+    .send-btn:hover { opacity: 0.8; }
+    .send-btn:disabled { opacity: 0.3; cursor: not-allowed; }
+  `}</style>
+)
 
 // --- DATA ---
-const contentMap = {
-  intro: {
-    title: 'vinayak_dubey.exe',
-    text: `  Software Developer @ Oracle\nBengaluru, India\n\nBuilding robust, scalable systems at the intersection of Artificial Intelligence and Distributed Computing.`,
-  },
-  about: {
-    title: 'cat profile.txt',
-    text: `PROFESSIONAL SUMMARY\n====================\nSoftware Developer at Oracle with expertise in AI Agents and Database development.\n\n• Track record of designing scalable enterprise solutions.\n• Strong foundation in Algorithms & Data Structures.\n• Expert in Distributed Systems Architecture.`,
-  },
-  experience: {
-    title: "history | grep 'work'",
-    text: ` ORACLE CORPORATION\n2024 - Present | Bengaluru, India\n---------------------------------\n[+] Developing enterprise-scale applications.\n[+] Implementing APIs and distributed systems.\n[+] Contributing to ODI/Database development.\n[+] Optimizing database queries for high-throughput.\n\nTIMELY AI (Intern)\nJuly 2023 | Remote\n------------------\n[+] Automated business processes for independent professionals.\n[+] Abstracted operational workflows from creative work.\n[+] Integrated AI solutions to streamline user efficiency.\n\nEXQUISITE (Founding Member)\nSep 2022 - May 2023\n-------------------\n[+] Created MLPs (Minimum Lovable Products) for early-stage startups.\n[+] Led rapid prototyping and full-stack development cycles.\n[+] Collaborated with founders to translate vision into code.\n\nSTEPAPP (Developer)\nSep 2022 - Jan 2023\n-------------------\n[+] Contributed to core application development.\n[+] Maintained codebase and implemented new feature sets.\n[+] Worked on bug fixes and performance optimization.`,
-  },
-  skills: {
-    title: 'ls -la ./skills',
-    text: `LANGUAGES\n[ C++, Python, JavaScript, SQL ]\n\nADVANCED AI/ML\n[ LLMs/Transformers, RAG Systems, PyTorch ]\n[ Computer Vision, MLOps, LangChain ]\n\nDEVOPS & CLOUD\n[ Docker, Kubernetes, Jenkins/CI-CD ]\n[ Terraform, AWS, Prometheus ]\n\nFRAMEWORKS\n[ React, Next.js, Node.js, Express ]`,
-  },
-  blogs: { title: 'curl -X GET api/ai-research', text: '' },
-  game: { title: './play_tic_tac_toe.sh', text: '' },
-  chat: { title: './start_ai_agent.sh --mode=advanced', text: '' },
-  contact: {
-    title: 'whoami --contact',
-    text: `EMAIL\nvinayak.d.dubey@oracle.com\n\nPROFESSIONAL NETWORKS\nLinkedIn: https://linkedin.com/in/vinayaksde\nGitHub:   https://github.com/VinayakDubey07\nMedium:   https://medium.com/@vinayakdubey.is20\n\nSTATUS\nOpen for interesting technical challenges and consulting.`,
-  },
+const PROFILE = {
+  name: 'Vinayak Dubey',
+  role: 'Software Developer @ Oracle',
+  location: 'Bengaluru, India',
+  email: 'vinayak.d.dubey@oracle.com',
+  linkedin: 'https://linkedin.com/in/vinayaksde',
+  github: 'https://github.com/VinayakDubey07',
+  medium: 'https://medium.com/@vinayakdubey.is20',
 }
 
-// --- ADVANCED AI KNOWLEDGE BASE ---
-const KNOWLEDGE_BASE = [
+const SYSTEM_PROMPT = `You are an AI assistant for Vinayak Dubey's portfolio website. 
+You answer questions about Vinayak in a concise, technical, terminal-style manner.
+Keep responses short (2-5 sentences max), factual, and confident.
+Use plain text only — no markdown, no asterisks, no bullet symbols.
+If asked something you don't know, say so briefly.
+
+ABOUT VINAYAK:
+- Software Developer at Oracle Corporation, Bengaluru (2024-Present)
+- Works on enterprise-scale applications, distributed systems, ODI/Database development
+- Previously: TimelyAI (Intern, 2023), Exquisite Founding Member (2022-2023), StepApp Developer (2022-2023)
+- Skills: C++, Python, JavaScript, SQL, PyTorch, LangChain, RAG Systems, React, Next.js, Node.js, Docker, Kubernetes, AWS
+- Projects: Decentralized Image Storage (Blockchain/IPFS), AI Article Summarizer (NLP/OpenAI), Blockchain Multi-chat App (Gun.js/WebRTC)
+- Contact: vinayak.d.dubey@oracle.com
+- Open to interesting technical challenges and consulting`
+
+const PROJECTS = [
   {
-    keywords: ['hi', 'hello', 'hey', 'greetings', 'hola'],
-    response:
-      "Greetings. I am Vinayak's digital clone, v2.0. I can answer technical questions about my background, skills, or projects. Try asking: 'What is your tech stack?' or 'Tell me about your Oracle experience'.",
+    id: 'p1',
+    name: 'Decentralized Image Storage',
+    desc: 'Peer-to-peer image storage using blockchain and IPFS. Eliminates central server dependency with on-chain verification.',
+    tags: ['Blockchain', 'IPFS', 'Web3', 'Solidity'],
+    year: '2023',
   },
   {
-    keywords: [
-      'skill',
-      'stack',
-      'technology',
-      'language',
-      'framework',
-      'code',
-      'coding',
-    ],
-    response:
-      'I am a Software Engineer with a heavy focus on AI and Distributed Systems.\n\nPrimary Stack:\n• Languages: C++, Python, JavaScript, SQL\n• AI/ML: PyTorch, TensorFlow, LangChain, RAG Systems\n• Web: React, Next.js, Node.js\n• Cloud/DevOps: AWS, Docker, Kubernetes',
+    id: 'p2',
+    name: 'AI Article Summarizer',
+    desc: 'NLP pipeline leveraging OpenAI to distill long-form content. Supports batch processing with configurable output length.',
+    tags: ['NLP', 'OpenAI', 'Python', 'RAG'],
+    year: '2023',
   },
   {
-    keywords: ['oracle', 'current', 'job', 'work', 'role'],
-    response:
-      'I am currently a Software Developer at Oracle Corporation (Bengaluru). My daily work involves:\n1. Developing enterprise-scale applications.\n2. Building distributed systems.\n3. Optimizing high-throughput database queries for ODI.\n4. Collaborating on system architecture.',
-  },
-  {
-    keywords: ['timely', 'intern', 'internship'],
-    response:
-      'I interned at TimelyAI (July 2023), where I focused on automating business processes using AI. I helped abstract operational workflows for independent professionals, integrating AI to boost efficiency.',
-  },
-  {
-    keywords: ['exquisite', 'startup', 'founding'],
-    response:
-      "I was a Founding Member at Exquisite (2022-2023). I wore many hats, leading rapid prototyping and creating 'Minimum Lovable Products' (MLPs) for early-stage startups.",
-  },
-  {
-    keywords: ['project', 'build', 'portfolio', 'app'],
-    response:
-      'My key projects include:\n1. Decentralized Image Storage (Blockchain/IPFS)\n2. AI Article Summarizer (NLP/OpenAI)\n3. Blockchain Multi-chat App (Gun.js/WebRTC)\n\nWhich one would you like technical details on?',
-  },
-  {
-    keywords: ['contact', 'email', 'reach', 'hire'],
-    response:
-      'I am open to interesting opportunities. You can reach me at vinayak.d.dubey@oracle.com or find me on LinkedIn.',
-  },
-  {
-    keywords: ['blockchain', 'web3', 'decentralized'],
-    response:
-      "I have strong experience in Web3. I've built smart contracts for secure storage and peer-to-peer messaging apps using Gun.js to eliminate central server dependencies.",
-  },
-  {
-    keywords: ['ai', 'ml', 'artificial', 'intelligence', 'llm', 'rag'],
-    response:
-      'AI is my primary focus. I work with Large Language Models (LLMs), implement Retrieval-Augmented Generation (RAG) for better context, and use frameworks like LangChain and PyTorch to build intelligent agents.',
+    id: 'p3',
+    name: 'Blockchain Multi-Chat',
+    desc: 'Serverless real-time messaging app using Gun.js and WebRTC. No central server, fully encrypted P2P communication.',
+    tags: ['Gun.js', 'WebRTC', 'P2P', 'JavaScript'],
+    year: '2022',
   },
 ]
 
@@ -244,91 +143,89 @@ const TicTacToe = () => {
   const [status, setStatus] = useState('YOUR TURN [X]')
 
   const checkWinner = squares => {
-    const lines = [
-      [0, 1, 2],
-      [3, 4, 5],
-      [6, 7, 8],
-      [0, 3, 6],
-      [1, 4, 7],
-      [2, 5, 8],
-      [0, 4, 8],
-      [2, 4, 6],
-    ]
-    for (let i = 0; i < lines.length; i++) {
-      const [a, b, c] = lines[i]
-      if (squares[a] && squares[a] === squares[b] && squares[a] === squares[c])
-        return squares[a]
+    const lines = [[0,1,2],[3,4,5],[6,7,8],[0,3,6],[1,4,7],[2,5,8],[0,4,8],[2,4,6]]
+    for (const [a,b,c] of lines) {
+      if (squares[a] && squares[a]===squares[b] && squares[a]===squares[c]) return squares[a]
     }
-    return squares.includes(null) ? null : 'Draw'
+    return squares.includes(null) ? null : 'DRAW'
+  }
+
+  const minimax = (sq, isMax) => {
+    const w = checkWinner(sq)
+    if (w === 'O') return 10
+    if (w === 'X') return -10
+    if (!sq.includes(null)) return 0
+    const scores = sq.map((v,i) => {
+      if (v) return isMax ? -Infinity : Infinity
+      const next = [...sq]; next[i] = isMax ? 'O' : 'X'
+      return minimax(next, !isMax)
+    })
+    return isMax ? Math.max(...scores) : Math.min(...scores)
+  }
+
+  const getBestMove = squares => {
+    let best = -Infinity, move = -1
+    squares.forEach((v, i) => {
+      if (!v) {
+        const next = [...squares]; next[i] = 'O'
+        const score = minimax(next, false)
+        if (score > best) { best = score; move = i }
+      }
+    })
+    return move
   }
 
   const handleClick = index => {
     if (board[index] || winner || !isPlayerTurn) return
-    const newBoard = [...board]
-    newBoard[index] = 'X'
-    setBoard(newBoard)
-    setIsPlayerTurn(false)
-    const result = checkWinner(newBoard)
-    if (result) {
-      setWinner(result)
-      setStatus(result === 'Draw' ? 'GAME OVER: DRAW' : 'GAME OVER: YOU WIN')
-    } else {
-      setStatus('SYSTEM THINKING...')
-    }
+    const nb = [...board]; nb[index] = 'X'
+    setBoard(nb); setIsPlayerTurn(false)
+    const r = checkWinner(nb)
+    if (r) { setWinner(r); setStatus(r==='DRAW'?'DRAW — WELL PLAYED':'YOU WIN'); return }
+    setStatus('COMPUTING...')
   }
 
   useEffect(() => {
     if (!isPlayerTurn && !winner) {
-      const timer = setTimeout(() => {
-        const available = board
-          .map((v, i) => (v === null ? i : null))
-          .filter(v => v !== null)
-        if (available.length > 0) {
-          const randomMove =
-            available[Math.floor(Math.random() * available.length)]
-          const newBoard = [...board]
-          newBoard[randomMove] = 'O'
-          setBoard(newBoard)
-          setIsPlayerTurn(true)
-          const result = checkWinner(newBoard)
-          if (result) setWinner(result)
-          else setStatus('YOUR TURN [X]')
-        }
-      }, 600)
-      return () => clearTimeout(timer)
+      const t = setTimeout(() => {
+        const move = getBestMove(board)
+        if (move === -1) return
+        const nb = [...board]; nb[move] = 'O'
+        setBoard(nb); setIsPlayerTurn(true)
+        const r = checkWinner(nb)
+        if (r) { setWinner(r); setStatus(r==='DRAW'?'DRAW':'SYSTEM WINS') }
+        else setStatus('YOUR TURN [X]')
+      }, 500)
+      return () => clearTimeout(t)
     }
   }, [isPlayerTurn, board, winner])
 
-  const resetGame = () => {
-    setBoard(Array(9).fill(null))
-    setWinner(null)
-    setIsPlayerTurn(true)
-    setStatus('YOUR TURN [X]')
-  }
+  const reset = () => { setBoard(Array(9).fill(null)); setWinner(null); setIsPlayerTurn(true); setStatus('YOUR TURN [X]') }
 
   return (
-    <div style={{ animation: 'fadeIn 0.5s' }}>
-      <div style={styles.gameStatus}>STATUS: {status}</div>
-      <div style={styles.gameBoard}>
+    <div style={{ textAlign: 'center', paddingTop: '20px' }}>
+      <div style={{ fontSize: '11px', letterSpacing: '2px', color: theme.dim, marginBottom: '24px' }}>
+        STATUS: {status}
+      </div>
+      <div style={{
+        display: 'grid', gridTemplateColumns: 'repeat(3,1fr)', gap: '1px',
+        maxWidth: '240px', margin: '0 auto', background: '#1a1a1a',
+      }}>
         {board.map((cell, i) => (
-          <button
-            key={i}
-            style={{
-              ...styles.gameCell,
-              background: cell ? (cell === 'X' ? '#111' : '#222') : 'black',
-            }}
-            onClick={() => handleClick(i)}
-            disabled={!!cell || !!winner}
-          >
-            {cell}
+          <button key={i} className="game-cell"
+            onClick={() => handleClick(i)} disabled={!!cell||!!winner}
+            style={{ background: cell==='X'?'#080808':cell==='O'?'#0f0f0f':'#000' }}>
+            <span style={{ color: cell==='X'?'#fff':'#888' }}>{cell}</span>
           </button>
         ))}
       </div>
       {winner && (
-        <button onClick={resetGame} style={styles.resetBtn}>
-          RESTART_GAME.EXE
+        <button className="reset-btn" onClick={reset} style={{ marginTop: '28px' }}>
+          RESTART.EXE
         </button>
       )}
+      <div style={{ marginTop: '20px', fontSize: '10px', color: '#2a2a2a', letterSpacing: '1px' }}>
+        OPPONENT: MINIMAX ALGORITHM
+      </div>
     </div>
   )
 }
@@ -337,391 +234,377 @@ const TicTacToe = () => {
 const Blogs = () => {
   const [articles, setArticles] = useState([])
   const [loading, setLoading] = useState(true)
-  const [error, setError] = useState(null)
+  const [offline, setOffline] = useState(false)
 
   useEffect(() => {
-    const fetchNews = async () => {
-      try {
-        setLoading(true)
-        const response = await fetch(
-          'https://hn.algolia.com/api/v1/search_by_date?query=LLM+OR+Generative+AI&tags=story&hitsPerPage=6'
-        )
-        if (!response.ok) throw new Error('Err')
-        const data = await response.json()
-        setArticles(data.hits)
-        setLoading(false)
-      } catch (err) {
+    fetch('https://hn.algolia.com/api/v1/search_by_date?query=LLM+OR+Generative+AI&tags=story&hitsPerPage=8')
+      .then(r => r.json())
+      .then(d => { setArticles(d.hits); setLoading(false) })
+      .catch(() => {
         setArticles([
-          {
-            title: 'Attention Is All You Need',
-            url: 'https://arxiv.org/abs/1706.03762',
-            created_at: 'Classic',
-          },
-          {
-            title: 'GPT-4 Technical Report',
-            url: 'https://arxiv.org/abs/2303.08774',
-            created_at: 'Classic',
-          },
+          { title: 'Attention Is All You Need', url: 'https://arxiv.org/abs/1706.03762', created_at: null },
+          { title: 'GPT-4 Technical Report', url: 'https://arxiv.org/abs/2303.08774', created_at: null },
+          { title: 'LangChain Documentation', url: 'https://docs.langchain.com', created_at: null },
         ])
-        setError('OFFLINE MODE')
-        setLoading(false)
-      }
-    }
-    fetchNews()
+        setOffline(true); setLoading(false)
+      })
   }, [])
 
-  if (loading)
-    return (
-      <div style={{ padding: '20px 0' }}>
-        {['Scanning ArXiv...', 'Querying Neural Networks...'].map((txt, i) => (
-          <div key={i}>{`> ${txt}`}</div>
-        ))}
-        <span className="cursor"></span>
-      </div>
-    )
+  if (loading) return (
+    <div style={{ color: theme.dim, fontSize: '13px', paddingTop: '10px' }}>
+      <div>&gt; Fetching AI research feeds...</div>
+      <div style={{ marginTop: '8px' }}><span className="cursor" /></div>
+    </div>
+  )
 
   return (
     <div>
-      {error && (
-        <div style={{ color: theme.dim, marginBottom: '20px' }}>! {error}</div>
-      )}
-      {articles.map((article, index) => (
-        <div
-          key={index}
-          style={{ marginBottom: '25px', animation: 'fadeIn 0.5s' }}
-        >
-          <div style={{ fontSize: '11px', color: theme.dim }}>
-            [{index + 1}]{' '}
-            {article.created_at === 'Classic'
-              ? 'ARCHIVE'
-              : new Date(article.created_at).toLocaleDateString()}
+      {offline && <div style={{ color: theme.dim, fontSize: '11px', marginBottom: '20px', letterSpacing: '1px' }}>! OFFLINE MODE — SHOWING ARCHIVES</div>}
+      {articles.map((a, i) => (
+        <div key={i} className="fade-up" style={{ marginBottom: '22px', animationDelay: `${i*40}ms` }}>
+          <div style={{ fontSize: '10px', color: theme.dim, letterSpacing: '1px', marginBottom: '4px' }}>
+            {a.created_at ? new Date(a.created_at).toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'}) : 'ARCHIVE'}
+            {' · '}{String(i+1).padStart(2,'0')}
           </div>
-          <div>
-            <a
-              href={article.url}
-              target="_blank"
-              rel="noreferrer"
-              style={{ ...styles.link, fontSize: '15px', fontWeight: 'bold' }}
-            >
-              {article.title || 'Untitled'}
-            </a>
-          </div>
+          <a href={a.url} target="_blank" rel="noreferrer" style={{ fontSize: '14px', fontWeight: '500' }}>
+            {a.title}
+          </a>
         </div>
       ))}
     </div>
   )
 }
 
-// --- ADVANCED AI CHAT COMPONENT ---
+// --- PROJECTS ---
+const Projects = () => (
+  <div style={{ display: 'grid', gap: '12px' }}>
+    {PROJECTS.map((p, i) => (
+      <div key={p.id} className="project-card fade-up" style={{ animationDelay: `${i*80}ms` }}>
+        <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '8px' }}>
+          <span style={{ fontSize: '14px', fontWeight: '700', letterSpacing: '0.5px' }}>{p.name}</span>
+          <span style={{ fontSize: '10px', color: theme.dim, letterSpacing: '1px' }}>{p.year}</span>
+        </div>
+        <div style={{ fontSize: '13px', color: '#aaa', marginBottom: '12px', lineHeight: '1.7' }}>{p.desc}</div>
+        <div>{p.tags.map(t => <span key={t} className="tag">{t}</span>)}</div>
+      </div>
+    ))}
+  </div>
+)
+
+// --- CLAUDE-POWERED CHAT ---
 const AIChat = () => {
   const [input, setInput] = useState('')
   const [history, setHistory] = useState([])
-  const [isTyping, setIsTyping] = useState(false)
-  const [bootSequence, setBootSequence] = useState(true)
-  const chatEndRef = useRef(null)
+  const [loading, setLoading] = useState(false)
+  const [booted, setBooted] = useState(false)
+  const endRef = useRef(null)
+  const inputRef = useRef(null)
 
-  // Boot Sequence Effect
   useEffect(() => {
-    const bootSteps = [
-      'Initializing Neural Network...',
-      'Loading Knowledge Base (Vector Embeddings)...',
-      "Connecting to Vinayak's Database...",
-      "Vinayak's AI is Online.",
+    const steps = [
+      { sender: 'SYS', text: 'Initializing Claude-powered agent...' },
+      { sender: 'SYS', text: 'Loading knowledge context...' },
+      { sender: 'SYS', text: 'Agent online. Ask me anything about Vinayak.' },
     ]
-
     let delay = 0
-    bootSteps.forEach((step, index) => {
-      delay += 800
+    steps.forEach((s, i) => {
+      delay += 600
       setTimeout(() => {
-        setHistory(prev => [...prev, { sender: 'SYS', text: step }])
-        if (index === bootSteps.length - 1) {
-          setBootSequence(false)
-          // Add initial greeting after boot
-          setTimeout(() => {
-            setHistory(prev => [
-              ...prev,
-              {
-                sender: 'AI',
-                text: "Systems operational. I can answer queries about Vinayak's Experience, Skills, or Projects.",
-              },
-            ])
-          }, 500)
+        setHistory(prev => [...prev, s])
+        if (i === steps.length - 1) {
+          setBooted(true)
+          setTimeout(() => inputRef.current?.focus(), 100)
         }
       }, delay)
     })
   }, [])
 
-  // Advanced Scoring Logic
-  const generateResponse = query => {
-    const q = query.toLowerCase()
+  useEffect(() => { endRef.current?.scrollIntoView({ behavior: 'smooth' }) }, [history, loading])
 
-    // Find best match based on keyword overlap
-    let bestMatch = null
-    let maxScore = 0
-
-    KNOWLEDGE_BASE.forEach(entry => {
-      let score = 0
-      entry.keywords.forEach(keyword => {
-        if (q.includes(keyword)) score++
-      })
-      if (score > maxScore) {
-        maxScore = score
-        bestMatch = entry
-      }
-    })
-
-    if (bestMatch && maxScore > 0) {
-      return bestMatch.response
-    }
-
-    // Default fallbacks based on specific unknown queries
-    if (q.length < 3)
-      return 'Please elaborate. My context window requires more input.'
-    return "Query outside training data parameters. Try asking about 'Skills', 'Oracle Work', or 'Projects'."
-  }
-
-  const typeWriterResponse = text => {
-    setIsTyping(true)
-    let index = 0
-    // Create an empty message to fill
-    setHistory(prev => [...prev, { sender: 'AI', text: '' }])
-
-    const interval = setInterval(() => {
-      setHistory(prev => {
-        const newHistory = [...prev]
-        const lastMsg = newHistory[newHistory.length - 1]
-        lastMsg.text = text.substring(0, index + 1)
-        return newHistory
-      })
-      index++
-      if (index === text.length) {
-        clearInterval(interval)
-        setIsTyping(false)
-      }
-    }, 15) // Speed of typing
-  }
-
-  const handleSend = e => {
-    e.preventDefault()
-    if (!input.trim() || bootSequence || isTyping) return
-
-    const userText = input
-    setHistory(prev => [...prev, { sender: 'USR', text: userText }])
+  const sendMessage = async () => {
+    if (!input.trim() || loading || !booted) return
+    const userText = input.trim()
     setInput('')
-    setIsTyping(true)
+    setHistory(prev => [...prev, { sender: 'USR', text: userText }])
+    setLoading(true)
 
-    // Artificial thinking delay
-    setTimeout(() => {
-      const responseText = generateResponse(userText)
-      setIsTyping(false) // Stop "thinking" indicator
-      typeWriterResponse(responseText) // Start "typing" effect
-    }, 1000)
+    // Build conversation history for the API
+    const conversationHistory = history
+      .filter(m => m.sender === 'USR' || m.sender === 'AI')
+      .map(m => ({ role: m.sender === 'USR' ? 'user' : 'assistant', content: m.text }))
+
+    conversationHistory.push({ role: 'user', content: userText })
+
+    try {
+      const response = await fetch('https://api.anthropic.com/v1/messages', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          model: 'claude-sonnet-4-20250514',
+          max_tokens: 1000,
+          system: SYSTEM_PROMPT,
+          messages: conversationHistory,
+        }),
+      })
+      const data = await response.json()
+      const replyText = data.content?.map(b => b.text || '').join('') || 'No response received.'
+      setHistory(prev => [...prev, { sender: 'AI', text: replyText }])
+    } catch {
+      setHistory(prev => [...prev, { sender: 'AI', text: 'Connection error. Claude API unreachable.' }])
+    } finally {
+      setLoading(false)
+    }
   }
 
-  useEffect(() => {
-    chatEndRef.current?.scrollIntoView({ behavior: 'smooth' })
-  }, [history])
+  const handleKey = e => { if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); sendMessage() } }
 
   return (
-    <div style={styles.chatContainer}>
-      <div style={styles.chatHistory}>
+    <div style={{
+      border: '1px solid #1a1a1a', background: theme.surface,
+      display: 'flex', flexDirection: 'column', height: '480px',
+    }}>
+      {/* Header */}
+      <div style={{
+        borderBottom: '1px solid #1a1a1a', padding: '10px 16px',
+        fontSize: '10px', letterSpacing: '2px', color: theme.dim,
+        display: 'flex', justifyContent: 'space-between',
+      }}>
+        <span>CLAUDE-POWERED AGENT v2.0</span>
+        <span style={{ color: booted ? '#4a4' : '#555' }}>● {booted ? 'ONLINE' : 'BOOTING'}</span>
+      </div>
+
+      {/* Messages */}
+      <div style={{ flex: 1, overflowY: 'auto', padding: '16px', fontSize: '13px', lineHeight: '1.7' }}>
         {history.map((msg, i) => (
-          <div
-            key={i}
-            style={{
-              marginBottom: '15px',
-              color:
-                msg.sender === 'USR'
-                  ? theme.text
-                  : msg.sender === 'SYS'
-                  ? theme.dim
-                  : theme.text,
-            }}
-          >
-            <span
-              style={{
-                color:
-                  msg.sender === 'USR'
-                    ? theme.dim
-                    : msg.sender === 'SYS'
-                    ? '#444'
-                    : '#fff',
-                fontWeight: 'bold',
-                marginRight: '10px',
-              }}
-            >
-              [{msg.sender === 'AI' ? 'BOT' : msg.sender}]:
+          <div key={i} className="chat-msg" style={{ marginBottom: '14px' }}>
+            <span style={{
+              color: msg.sender === 'USR' ? '#aaa' : msg.sender === 'SYS' ? '#2a2a2a' : '#555',
+              fontWeight: '700', marginRight: '8px', fontSize: '10px', letterSpacing: '1px',
+            }}>
+              {msg.sender === 'AI' ? '[AGENT]' : msg.sender === 'USR' ? '[YOU]' : '[SYS]'}
             </span>
-            <span style={{ whiteSpace: 'pre-wrap' }}>{msg.text}</span>
+            <span style={{
+              color: msg.sender === 'USR' ? '#fff' : msg.sender === 'SYS' ? '#333' : '#ccc',
+              whiteSpace: 'pre-wrap',
+            }}>{msg.text}</span>
           </div>
         ))}
-        {isTyping && !history[history.length - 1]?.text && (
-          <div style={{ color: theme.dim }}>
-            [BOT]: Processing...<span className="cursor"></span>
+        {loading && (
+          <div style={{ color: theme.dim, fontSize: '13px' }}>
+            <span style={{ fontWeight: '700', marginRight: '8px', fontSize: '10px' }}>[AGENT]</span>
+            Processing<span className="cursor" />
           </div>
         )}
-        <div ref={chatEndRef} />
+        <div ref={endRef} />
       </div>
-      <form onSubmit={handleSend} style={{ opacity: bootSequence ? 0.5 : 1 }}>
+
+      {/* Input */}
+      <div style={{ borderTop: '1px solid #1a1a1a', padding: '10px 16px', display: 'flex', gap: '10px', alignItems: 'center' }}>
+        <span style={{ color: theme.dim, fontSize: '12px' }}>&gt;</span>
         <input
-          style={styles.chatInput}
+          ref={inputRef}
           value={input}
           onChange={e => setInput(e.target.value)}
-          placeholder={
-            bootSequence ? 'System Booting...' : 'Query the neural network...'
-          }
-          disabled={bootSequence}
-          autoFocus
+          onKeyDown={handleKey}
+          placeholder={booted ? 'Ask about Vinayak...' : 'Booting...'}
+          disabled={!booted || loading}
+          style={{
+            flex: 1, background: 'transparent', border: 'none', outline: 'none',
+            color: '#fff', fontFamily: theme.font, fontSize: '14px',
+          }}
         />
-      </form>
+        <button className="send-btn" onClick={sendMessage} disabled={!booted || loading || !input.trim()}>
+          SEND
+        </button>
+      </div>
     </div>
   )
 }
 
-// --- MAIN COMPONENT ---
-export default function Portfolio() {
-  const [activeTab, setActiveTab] = useState('intro')
-  const [displayedText, setDisplayedText] = useState('')
-  const typingRef = useRef(null)
+// --- CONTENT SECTIONS ---
+const SECTIONS = {
+  intro: {
+    cmd: 'cat profile.txt',
+    render: () => (
+      <div style={{ lineHeight: '2' }}>
+        <div style={{ fontSize: '22px', fontWeight: '700', letterSpacing: '-0.5px', marginBottom: '16px' }}>
+          {PROFILE.name}
+        </div>
+        <div style={{ color: theme.dim, marginBottom: '24px', letterSpacing: '1px', fontSize: '12px' }}>
+          SOFTWARE DEVELOPER · ORACLE CORPORATION · BENGALURU
+        </div>
+        <div style={{ fontSize: '14px', color: '#bbb', maxWidth: '500px', lineHeight: '1.9' }}>
+          Building robust, scalable systems at the intersection of Artificial Intelligence and Distributed Computing.
+          Focused on high-throughput database architecture and intelligent agent frameworks.
+        </div>
+        <div style={{ marginTop: '32px', display: 'flex', gap: '20px', flexWrap: 'wrap' }}>
+          {[['GitHub', PROFILE.github], ['LinkedIn', PROFILE.linkedin], ['Medium', PROFILE.medium]].map(([label, url]) => (
+            <a key={label} href={url} target="_blank" rel="noreferrer"
+              style={{ fontSize: '11px', letterSpacing: '1.5px', color: theme.dim }}>
+              {label} ↗
+            </a>
+          ))}
+        </div>
+      </div>
+    ),
+  },
+  about: {
+    cmd: 'cat about.txt',
+    render: () => (
+      <TypedText text={`PROFESSIONAL SUMMARY\n\nSoftware Developer at Oracle with expertise in AI Agents and Database development. Track record of designing scalable enterprise solutions. Strong foundation in Algorithms & Data Structures with expertise in Distributed Systems Architecture.\n\nI thrive at the edge of AI systems and production infrastructure — building things that work reliably at scale.`} />
+    ),
+  },
+  experience: {
+    cmd: "history | grep work",
+    render: () => (
+      <TypedText text={`ORACLE CORPORATION — Software Developer\n2024 - Present · Bengaluru\n\n  • Enterprise-scale application development\n  • Distributed systems & API implementation\n  • ODI/Database optimization for high-throughput\n  • Core infrastructure contribution\n\n──────────────────────────────────────\n\nTIMELY AI — Software Engineering Intern\nJuly 2023 · Remote\n\n  • Automated business processes using AI pipelines\n  • Abstracted operational workflows for professionals\n  • Integrated LLM solutions for efficiency gains\n\n──────────────────────────────────────\n\nEXQUISITE — Founding Member\nSep 2022 - May 2023\n\n  • Created MLPs for early-stage startups\n  • Led rapid prototyping cycles\n  • Full-stack development across multiple products\n\n──────────────────────────────────────\n\nSTEPAPP — Developer\nSep 2022 - Jan 2023\n\n  • Core application development\n  • Feature implementation & performance optimization`} />
+    ),
+  },
+  skills: {
+    cmd: 'ls -la ./skills',
+    render: () => (
+      <TypedText text={`LANGUAGES\nC++  ·  Python  ·  JavaScript  ·  SQL\n\n──────────────────────────────────────\n\nAI / MACHINE LEARNING\nLLMs & Transformers  ·  RAG Systems  ·  PyTorch\nComputer Vision  ·  MLOps  ·  LangChain\nOpenAI API  ·  Vector Databases\n\n──────────────────────────────────────\n\nDEVOPS & CLOUD\nDocker  ·  Kubernetes  ·  Jenkins  ·  CI/CD\nTerraform  ·  AWS  ·  Prometheus  ·  Grafana\n\n──────────────────────────────────────\n\nFRAMEWORKS & TOOLS\nReact  ·  Next.js  ·  Node.js  ·  Express\nGun.js  ·  WebRTC  ·  IPFS  ·  Solidity`} />
+    ),
+  },
+  projects: { cmd: 'ls ./projects', render: () => <Projects /> },
+  blogs: { cmd: 'curl api/ai-research', render: () => <Blogs /> },
+  game: { cmd: './tictactoe.sh', render: () => <TicTacToe /> },
+  chat: { cmd: './agent --model=claude', render: () => <AIChat /> },
+  contact: {
+    cmd: 'whoami --contact',
+    render: () => (
+      <TypedText text={`EMAIL\n${PROFILE.email}\n\n──────────────────────────────────────\n\nPROFESSIONAL NETWORKS\n\nLinkedIn  ${PROFILE.linkedin}\nGitHub    ${PROFILE.github}\nMedium    ${PROFILE.medium}\n\n──────────────────────────────────────\n\nSTATUS\nOpen for interesting technical challenges and consulting.`} />
+    ),
+  },
+}
+
+// --- TYPED TEXT COMPONENT ---
+const TypedText = ({ text }) => {
+  const [displayed, setDisplayed] = useState('')
+  const ref = useRef(null)
 
   useEffect(() => {
-    if (['game', 'blogs', 'chat'].includes(activeTab)) return
-    const fullText = contentMap[activeTab].text
-    setDisplayedText('')
-    let index = 0
-    if (typingRef.current) clearInterval(typingRef.current)
-    typingRef.current = setInterval(() => {
-      if (index < fullText.length) {
-        setDisplayedText(prev => prev + fullText.charAt(index))
-        index++
-      } else {
-        clearInterval(typingRef.current)
-      }
-    }, 10)
-    return () => clearInterval(typingRef.current)
-  }, [activeTab])
+    setDisplayed('')
+    let i = 0
+    ref.current = setInterval(() => {
+      if (i < text.length) { setDisplayed(text.slice(0, i + 1)); i++ }
+      else clearInterval(ref.current)
+    }, 8)
+    return () => clearInterval(ref.current)
+  }, [text])
 
-  const renderTextWithLinks = text => {
-    const urlRegex = /((https?:\/\/[^\s]+)|(www\.[^\s]+))/g
-    const emailRegex = /([a-zA-Z0-9._-]+@[a-zA-Z0-9._-]+\.[a-zA-Z0-9_-]+)/g
-    return text.split('\n').map((line, i) => {
-      const parts = line.split(' ')
-      return (
-        <div key={i} style={{ minHeight: '1.6em' }}>
-          {parts.map((part, j) => {
-            if (part.match(urlRegex) || part.match(emailRegex)) {
-              return (
-                <a
-                  key={j}
-                  href={part.includes('@') ? `mailto:${part}` : part}
-                  target="_blank"
-                  rel="noreferrer"
-                  style={styles.link}
-                >
-                  {part}
-                </a>
-              )
-            }
-            return <span key={j}>{part} </span>
-          })}
-        </div>
-      )
-    })
+  const renderLine = (line, i) => {
+    const urlRe = /https?:\/\/\S+/g
+    if (!urlRe.test(line)) return <div key={i} style={{ minHeight: '1.6em' }}>{line}</div>
+    const parts = []; let last = 0; let m
+    urlRe.lastIndex = 0
+    while ((m = urlRe.exec(line)) !== null) {
+      if (m.index > last) parts.push(<span key={last}>{line.slice(last, m.index)}</span>)
+      parts.push(<a key={m.index} href={m[0]} target="_blank" rel="noreferrer">{m[0]}</a>)
+      last = m.index + m[0].length
+    }
+    if (last < line.length) parts.push(<span key={last}>{line.slice(last)}</span>)
+    return <div key={i} style={{ minHeight: '1.6em' }}>{parts}</div>
+  }
+
+  return (
+    <div style={{ fontSize: '13px', lineHeight: '1.9', color: '#ccc', whiteSpace: 'pre-wrap' }}>
+      {displayed.split('\n').map(renderLine)}
+      <span className="cursor" />
+    </div>
+  )
+}
+
+// --- MAIN ---
+export default function Portfolio() {
+  const [activeTab, setActiveTab] = useState('intro')
+
+  const tabs = Object.keys(SECTIONS)
+  const TAB_LABELS = {
+    intro: 'HOME', about: 'ABOUT', experience: 'WORK',
+    skills: 'SKILLS', projects: 'PROJECTS', blogs: 'RESEARCH',
+    game: 'PLAY', chat: 'AI CHAT', contact: 'CONTACT',
   }
 
   return (
     <>
-      <style>
-        {`@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap');`}
-        {`
-          /* GLOBAL RESET */
-          body, html { margin: 0; padding: 0; background-color: #000000; width: 100%; height: 100%; }
-          ::selection { background: ${theme.text}; color: ${theme.bg}; }
-          @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
-          @keyframes fadeIn { from { opacity: 0; transform: translateY(5px); } to { opacity: 1; transform: translateY(0); } }
-          .cursor { animation: blink 1s step-end infinite; display: inline-block; width: 10px; height: 18px; background: white; vertical-align: text-bottom; margin-left: 4px; }
-          button:hover { opacity: 0.8; }
-        `}
-      </style>
-      <div style={styles.container}>
-        <div style={styles.inner}>
-          <header style={styles.header}>
-            <div style={styles.photoFrame}>
-              <img src="/1000108932.jpg" alt="Vinayak" style={styles.photo} />
+      <GlobalStyles />
+      <div className="scanline" />
+      <div style={{
+        minHeight: '100vh', background: theme.bg, color: theme.text,
+        fontFamily: theme.font, padding: '40px 20px',
+      }}>
+        <div style={{ maxWidth: '860px', margin: '0 auto' }}>
+
+          {/* HEADER */}
+          <header style={{
+            display: 'flex', gap: '32px', alignItems: 'center',
+            marginBottom: '48px', paddingBottom: '32px',
+            borderBottom: '1px solid #111', flexWrap: 'wrap',
+          }}>
+            <div style={{
+              width: '80px', height: '80px', flexShrink: 0,
+              border: '1px solid #1a1a1a', overflow: 'hidden',
+            }}>
+              <img src="/1000108932.jpg" alt="Vinayak" style={{
+                width: '100%', height: '100%', objectFit: 'cover',
+                filter: 'grayscale(100%) contrast(1.3)',
+              }} />
             </div>
             <div>
-              <h1
-                style={{
-                  fontSize: '32px',
-                  margin: '0 0 10px 0',
-                  letterSpacing: '-1px',
-                }}
-              >
+              <div style={{ fontSize: '24px', fontWeight: '700', letterSpacing: '-0.5px', marginBottom: '6px' }}>
                 Vinayak Dubey
-              </h1>
-              <div
-                style={{
-                  fontSize: '14px',
-                  color: theme.dim,
-                  marginBottom: '10px',
-                }}
-              >
-                Software at Oracle
               </div>
-              <div
-                style={{
-                  fontSize: '12px',
-                  border: `1px solid ${theme.darkGray}`,
-                  padding: '4px 8px',
-                  display: 'inline-block',
-                }}
-              >
-                STATUS: ONLINE
+              <div style={{ fontSize: '11px', color: theme.dim, letterSpacing: '2px', marginBottom: '12px' }}>
+                SOFTWARE DEVELOPER · ORACLE
+              </div>
+              <div style={{
+                display: 'inline-flex', alignItems: 'center', gap: '6px',
+                border: '1px solid #1a1a1a', padding: '4px 10px', fontSize: '10px',
+                letterSpacing: '1.5px', color: '#4a4',
+              }}>
+                <span style={{ width: '6px', height: '6px', borderRadius: '50%', background: '#4a4', display: 'inline-block' }} />
+                ONLINE
               </div>
             </div>
           </header>
-          <nav style={styles.nav}>
-            {Object.keys(contentMap).map(key => (
-              <button
-                key={key}
-                onClick={() => setActiveTab(key)}
-                style={styles.navButton(activeTab === key)}
-              >
-                {key === 'game'
-                  ? 'PLAY GAME'
-                  : key === 'chat'
-                  ? 'AI CHAT'
-                  : key}
+
+          {/* NAV */}
+          <nav style={{
+            display: 'flex', flexWrap: 'wrap', gap: '0',
+            marginBottom: '40px', borderBottom: '1px solid #111',
+          }}>
+            {tabs.map(tab => (
+              <button key={tab} className={`nav-btn${activeTab===tab?' active':''}`}
+                onClick={() => setActiveTab(tab)}>
+                {TAB_LABELS[tab] || tab.toUpperCase()}
               </button>
             ))}
           </nav>
-          <main style={styles.contentBox}>
-            <div
-              style={{
-                marginBottom: '20px',
-                color: theme.dim,
-                fontSize: '12px',
-              }}
-            >
-              $ {contentMap[activeTab].title}
+
+          {/* CONTENT */}
+          <main style={{ minHeight: '400px' }}>
+            <div style={{
+              fontSize: '10px', color: '#2a2a2a', letterSpacing: '1.5px',
+              marginBottom: '24px', fontWeight: '500',
+            }}>
+              $ {SECTIONS[activeTab].cmd}
             </div>
-            {activeTab === 'game' ? (
-              <TicTacToe />
-            ) : activeTab === 'blogs' ? (
-              <Blogs />
-            ) : activeTab === 'chat' ? (
-              <AIChat />
-            ) : (
-              <div style={{ whiteSpace: 'pre-wrap' }}>
-                {renderTextWithLinks(displayedText)}
-                <span className="cursor"></span>
-              </div>
-            )}
+            <div key={activeTab} className="fade-up">
+              {SECTIONS[activeTab].render()}
+            </div>
           </main>
-          <div style={styles.cliBar}>
+
+          {/* FOOTER */}
+          <footer style={{
+            marginTop: '80px', paddingTop: '20px', borderTop: '1px solid #111',
+            display: 'flex', justifyContent: 'space-between',
+            fontSize: '10px', color: '#222', letterSpacing: '1px',
+          }}>
             <span>user@oracle:~/portfolio/{activeTab}$ _</span>
-            <span>© 2025</span>
-          </div>
+            <span>© 2025 VINAYAK DUBEY</span>
+          </footer>
+
         </div>
       </div>
     </>
